@@ -1,0 +1,33 @@
+name: envoynode-probe
+
+services:
+  core-probe:
+    build:
+      context: .
+      dockerfile: Containerfile
+    image: envoynode/core-probe:local
+    pull_policy: never
+    labels:
+      io.envoynode.managed: "true"
+      io.envoynode.component: "core-probe"
+    ports:
+      - "127.0.0.1:18080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777,noexec,nosuid
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    user: "65532:65532"
+    init: true
+    pids_limit: 64
+    mem_limit: 256m
+    cpus: 1.0
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; assert urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=2).status == 200"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 2s

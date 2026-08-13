@@ -1,0 +1,34 @@
+# Local configuration and machine-generated artifacts
+/config/node.local.json
+/keys/
+/exports/
+/generated/
+/reports/*.json
+/state/
+
+# Environment and credential files
+.env
+.env.*
+!.env.example
+*.credentials
+*.secret
+*.secrets
+*.token
+credentials*.json
+*client-proof*.json
+
+# Private keys, certificates, and client identity files
+*.key
+*.pem
+*.pfx
+*.p12
+*.ppk
+*.jks
+*.keystore
+*.kdbx
+*.ovpn
+*.pub
+id_dsa*
+id_ecdsa*
+id_ed25519*
+id_rsa*

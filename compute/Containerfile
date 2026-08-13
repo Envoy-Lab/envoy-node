@@ -1,0 +1,13 @@
+FROM docker.io/library/python:3.11-slim@sha256:90744cff8f32887f075c47d747a173ff333e9e98801667af93c357fa9f5e28ff
+
+LABEL io.envoynode.managed="true" \
+      io.envoynode.component="core-probe" \
+      io.envoynode.base-digest="sha256:90744cff8f32887f075c47d747a173ff333e9e98801667af93c357fa9f5e28ff"
+
+WORKDIR /opt/envoy
+COPY --chown=65532:65532 app/server.py /opt/envoy/server.py
+
+USER 65532:65532
+EXPOSE 8080
+
+ENTRYPOINT ["python", "/opt/envoy/server.py"]

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "nodeName": "envoy-node",
+  "profile": "personal-lab",
+  "access": {
+    "exposePublicPorts": false,
+    "overlay": {
+      "provider": "tailscale",
+      "install": false,
+      "unattended": true,
+      "requireMfa": true,
+      "requireDeviceApproval": true,
+      "hostKeyExpiry": "keep-enabled"
+    },
+    "ssh": {
+      "enabled": true,
+      "targetUser": "",
+      "createStandardUser": false,
+      "port": 22,
+      "publicKeyFiles": [],
+      "passwordMode": "bootstrap-until-proven",
+      "allowLocalPortForwarding": true,
+      "allowedForwardTargets": [
+        "127.0.0.1:11434",
+        "127.0.0.1:18080"
+      ]
+    },
+    "desktop": {
+      "enabled": false,
+      "provider": "rustdesk-direct",
+      "port": 21118,
+      "requireTailnetWhitelist": true,
+      "blockPublicRustDeskEgress": true,
+      "disableLanDiscovery": true,
+      "disableRemoteConfiguration": true
+    }
+  },
+  "compute": {
+    "enabled": true,
+    "install": false,
+    "availability": "on-demand",
+    "runtime": "wsl2",
+    "distribution": "Ubuntu-24.04",
+    "linuxUser": "envoy",
+    "containerEngine": "docker-engine",
+    "resources": {
+      "memoryGB": 16,
+      "processors": 16,
+      "swapGB": 8,
+      "applyGlobalWslConfig": false
+    },
+    "gpu": {
+      "profile": "amd-rocm-wsl",
+      "activate": false,
+      "expectedArchitecture": "gfx1151",
+      "changeVariableGraphicsMemory": false
+    }
+  },
+  "safety": {
+    "requirePlanReview": true,
+    "requireSecondDeviceProof": true,
+    "neverRebootAutomatically": true,
+    "preserveExistingDockerWorkloads": true
+  }
+}

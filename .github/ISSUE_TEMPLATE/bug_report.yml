@@ -1,0 +1,55 @@
+name: Bug report
+description: Report a reproducible framework problem using redacted, synthetic evidence.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, keys, usernames, hostnames, SIDs, tailnet addresses, machine fingerprints, absolute personal paths, event records, client proofs, or unredacted JSON reports. Use private vulnerability reporting for security issues.
+  - type: input
+    id: action
+    attributes:
+      label: EnvoyNode action
+      description: Name the exact action or script without including local paths.
+      placeholder: Verify
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: Describe the result with all machine-specific values replaced by synthetic placeholders.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit
+      description: Full or abbreviated Git commit being tested.
+    validations:
+      required: true
+  - type: dropdown
+    id: applied
+    attributes:
+      label: Did the reproduction use -Apply?
+      options:
+        - "No"
+        - "Yes, in a controlled test environment"
+    validations:
+      required: true
+  - type: checkboxes
+    id: redaction
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I removed all secrets and machine-, account-, network-, event-, workload-, and key-bound identifiers.
+          required: true
+        - label: This report does not describe a security vulnerability that belongs in private reporting.
+          required: true

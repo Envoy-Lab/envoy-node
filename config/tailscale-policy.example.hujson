@@ -1,0 +1,25 @@
+{
+  // Replace the default allow-all policy after both trusted devices join.
+  // This rule lets only the tailnet owner reach devices they own on the
+  // EnvoyNode SSH port. The values below are defaults: substitute
+  // "tcp:<access.ssh.port>" when SSH uses a custom configured port, and add
+  // "tcp:<access.desktop.port>" only when the optional RustDesk direct-IP
+  // desktop adapter has been installed, configured, and reviewed.
+  "grants": [
+    {
+      "src": ["autogroup:owner"],
+      "dst": ["autogroup:self"],
+      "ip": ["tcp:22"]
+    }
+  ],
+
+  // Intentionally define no Taildrive nodeAttrs or application grants. Keep
+  // Taildrop / Send Files disabled separately in the admin-console settings.
+
+  // Before acknowledging tailnet controls, add concrete positive and negative
+  // tests in the Tailscale editor after the node and client have stable
+  // identities. A policy change that fails a test is rejected by Tailscale.
+  // This portable template cannot supply honest tests without inventing those
+  // deployment-specific identities, so an empty array is not activation-ready.
+  "tests": []
+}

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability privately
+    url: https://github.com/Envoy-Lab/envoy-node/security/advisories/new
+    about: Never post a vulnerability, secret, or unredacted machine report in a public issue.
